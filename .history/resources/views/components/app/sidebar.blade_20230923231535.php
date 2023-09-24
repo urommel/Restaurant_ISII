@@ -120,10 +120,10 @@
                             <ul class="pl-9 mt-1 @if(!in_array(Request::segment(1), ['community'])){{ 'hidden' }}@endif" :class="open ? '!block' : 'hidden'">
                                 <li class="mb-1 last:mb-0">
                                     <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if(Route::is('users-tabs')){{ '!text-indigo-500' }}@endif" href="#0">
-                                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Roles</span>
+                                        <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"></span>
                                     </a>
                                 </li>
-                                {{-- <li class="mb-1 last:mb-0">
+                                <li class="mb-1 last:mb-0">
                                     <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if(Route::is('users-tiles')){{ '!text-indigo-500' }}@endif" href="#0">
                                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Users - Tiles</span>
                                     </a>
@@ -157,7 +157,7 @@
                                     <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if(Route::is('meetups-post')){{ '!text-indigo-500' }}@endif" href="#0">
                                         <span class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Meetups - Post</span>
                                     </a>
-                                </li> --}}
+                                </li>
                             </ul>
                         </div>
                     </li>
