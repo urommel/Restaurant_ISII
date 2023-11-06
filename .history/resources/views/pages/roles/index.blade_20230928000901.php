@@ -1,0 +1,121 @@
+<x-app-layout>
+    <div class="w-full px-4 py-8 mx-auto sm:px-6 lg:px-8 max-w-9xl">
+        
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="p-4">
+                            <div class="flex items-center">
+                                <input id="checkbox-all-search" type="checkbox"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="checkbox-all-search" class="sr-only">checkbox</label>
+                            </div>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Rol
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Permisos
+                        </th>
+                        {{-- <th scope="col" class="px-6 py-3">
+                            Category
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Price
+                        </th> --}}
+                        <th scope="col" class="px-6 py-3">
+                            Acción
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($roles as $role)
+                        <tr
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    <input id="checkbox-table-search-1" type="checkbox"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
+                                </div>
+                            </td>
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $role->name }}
+                            </th>
+                            {{-- <td class="px-6 py-4">
+                            Silver
+                        </td>
+                        <td class="px-6 py-4">
+                            Laptop
+                        </td> --}}
+                            {{-- <td class="px-6 py-4">
+                                <ul>
+                                    <span
+                                        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                                        @foreach ($role->permissions as $permission)
+                                            <li>{{ $permission->name }}</li>
+                                        @endforeach
+                                    </span>
+                                </ul>
+                            </td> --}}
+                            <td class="px-6 py-4">
+                                @php $permissions = $role->permissions->pluck('name')->toArray(); @endphp
+
+                                <div class="flex flex-wrap space-x-2">
+                                    @foreach ($permissions as $permission)
+                                        <div
+                                            class="px-2 py-1 font-semibold leading-tight text-blue-700 bg-blue-100 rounded-full dark:bg-blue-700 dark:text-blue-100">
+                                            {{ $permission }},
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </td>
+
+
+                            <td class="px-6 py-4">
+                                <a href="#"
+                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <nav class="flex items-center justify-between pt-4" aria-label="Table navigation">
+                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                    Mostrar <span class="font-semibold text-gray-900 dark:text-white">
+                        {{ $roles->firstItem() }}-{{ $roles->lastItem() }}
+                    </span> de <span class="font-semibold text-gray-900 dark:text-white">
+                        {{ $roles->total() }}
+                    </span>
+                </span>
+                <ul class="inline-flex h-8 -space-x-px text-sm">
+                    <li>
+                        <a href="{{ $roles->previousPageUrl() }}"
+                            class="flex items-center justify-center h-8 px-3 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            @if (!$roles->onFirstPage()) aria-label="Anterior" @endif>
+                            Anterior
+                        </a>
+                    </li>
+                    @foreach ($roles as $role)
+                        <!-- Mostrar el número de página actual como texto -->
+                        <li>
+                            <span
+                                class="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                {{ $loop->iteration }}
+                            </span>
+                        </li>
+                    @endforeach
+                    <li>
+                        <a href="{{ $roles->nextPageUrl() }}"
+                            class="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            @if ($roles->hasMorePages()) aria-label="Siguiente" @endif>
+                            Siguiente
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+</x-app-layout>
